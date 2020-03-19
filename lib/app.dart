@@ -1,3 +1,5 @@
+import 'package:filter_theory/mock/products.dart';
+import 'package:filter_theory/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -8,19 +10,23 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: AppBady(),
-        appBar: AppBar(
-          title: Text('Filter Theory'),
-        ));
+    return MaterialApp(
+      home: Scaffold(
+          body: AppBody(),
+          appBar: AppBar(
+            title: Text('Filter Theory'),
+          )),
+    );
   }
 }
 
-class AppBady extends StatelessWidget {
+class AppBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('LOvalace'),
-    );
+    return ListView.builder(
+        itemCount: mockProducts.length,
+        itemBuilder: (context, index) => ProductWidget(
+              data: mockProducts[index],
+            ));
   }
 }

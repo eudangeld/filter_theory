@@ -1,7 +1,7 @@
 import 'package:filter_theory/model/category.dart';
 import 'package:filter_theory/model/product_data.dart';
 
-List<ProductData> procuts = [
+List<ProductData> mockProducts = [
   ProductData(
       name: 'Honda', rategeneral: 3, price: 150, category: Category.category_1),
   ProductData(
