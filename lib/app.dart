@@ -1,4 +1,5 @@
-import 'package:filter_theory/mock/products.dart';
+import 'package:filter_theory/model/app_state.dart';
+import 'package:filter_theory/model/product_data.dart';
 import 'package:filter_theory/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: AppBody(),
+          body: AppState(
+            child: AppBody(),
+          ),
           appBar: AppBar(
             title: Text('Filter Theory'),
           )),
@@ -23,10 +26,18 @@ class _AppState extends State<App> {
 class AppBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: mockProducts.length,
-        itemBuilder: (context, index) => ProductWidget(
-              data: mockProducts[index],
-            ));
+    return StreamBuilder<List<ProductData>>(
+        stream: AppState.of(context).products,
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data.isNotEmpty) {
+            return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) => ProductWidget(
+                      data: snapshot.data[index],
+                    ));
+          }
+
+          return Container();
+        });
   }
 }
