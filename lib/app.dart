@@ -1,3 +1,4 @@
+import 'package:filter_theory/mock/products.dart';
 import 'package:filter_theory/model/app_state.dart';
 import 'package:filter_theory/model/product_data.dart';
 import 'package:filter_theory/widgets/product_widget.dart';
@@ -26,6 +27,7 @@ class _AppState extends State<App> {
 class AppBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppState.of(context).products.add(mockProducts);
     return StreamBuilder<List<ProductData>>(
         stream: AppState.of(context).products,
         builder: (context, snapshot) {
